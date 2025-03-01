@@ -31,7 +31,7 @@ Simply download the HTML file and open it in any modern web browser. No server o
 
 ## 🌐 Live Demo
 
-Check out the live version: [LinkedIn Job Search Query Builder](https://buzz39.github.io/job-search-tool)
+Check out the live version: [LinkedIn Job Search Query Builder](https://buzz39.github.io/job-search-tool/)
 
 ## 💡 Why This Tool?
 

@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LinkedIn Job Search Query Builder</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        h1 {
+            color: #0077b5;
+            text-align: center;
+        }
+        .container {
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        input[type="text"], select {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        .keyword-container {
+            border: 1px solid #ddd;
+            padding: 10px;
+            border-radius: 4px;
+            margin-bottom: 10px;
+        }
+        .keyword-row {
+            display: flex;
+            margin-bottom: 10px;
+            align-items: center;
+        }
+        .keyword-input {
+            flex-grow: 1;
+            margin-right: 10px;
+        }
+        button {
+            background-color: #0077b5;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+        button:hover {
+            background-color: #005582;
+        }
+        .remove-btn {
+            background-color: #e74c3c;
+        }
+        .remove-btn:hover {
+            background-color: #c0392b;
+        }
+        .result {
+            margin-top: 20px;
+            padding: 15px;
+            background-color: #f9f9f9;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            word-break: break-all;
+        }
+        .controls {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 15px;
+        }
+        .operator-select {
+            width: 80px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>LinkedIn Job Search Query Builder</h1>
+        
+        <div class="form-group">
+            <label for="site">Site:</label>
+            <input type="text" id="site" value="linkedin.com/jobs" readonly>
+        </div>
+        
+        <div class="form-group">
+            <label>Keywords (with operators):</label>
+            <div id="keywords-container">
+                <div class="keyword-container">
+                    <div class="keyword-row">
+                        <input type="text" class="keyword-input" placeholder="Enter keyword (e.g., AI)">
+                        <select class="operator-select">
+                            <option value="OR">OR</option>
+                            <option value="AND">AND</option>
+                        </select>
+                        <button class="remove-btn" onclick="removeKeyword(this)">Remove</button>
+                    </div>
+                </div>
+            </div>
+            <button onclick="addKeyword()">Add Keyword</button>
+        </div>
+        
+        <div class="form-group">
+            <label for="num">Number of results:</label>
+            <input type="text" id="num" value="10">
+        </div>
+        
+        <div class="form-group">
+            <label for="time-range">Time range:</label>
+            <select id="time-range">
+                <option value="qdr:d">Past 24 hours</option>
+                <option value="qdr:w">Past week</option>
+                <option value="qdr:m">Past month</option>
+                <option value="qdr:y">Past year</option>
+                <option value="">Any time</option>
+            </select>
+        </div>
+        
+        <div class="controls">
+            <button onclick="generateQuery()">Generate Query</button>
+            <button onclick="openQuery()">Generate & Open</button>
+        </div>
+        
+        <div class="result" id="result">
+            Your query will appear here...
+        </div>
+    </div>
+
+    <script>
+        function addKeyword() {
+            const container = document.getElementById('keywords-container');
+            const newKeyword = document.createElement('div');
+            newKeyword.className = 'keyword-container';
+            newKeyword.innerHTML = `
+                <div class="keyword-row">
+                    <input type="text" class="keyword-input" placeholder="Enter keyword (e.g., AI)">
+                    <select class="operator-select">
+                        <option value="OR">OR</option>
+                        <option value="AND">AND</option>
+                    </select>
+                    <button class="remove-btn" onclick="removeKeyword(this)">Remove</button>
+                </div>
+            `;
+            container.appendChild(newKeyword);
+        }
+        
+        function removeKeyword(button) {
+            const container = button.closest('.keyword-container');
+            container.remove();
+        }
+        
+        function generateQuery() {
+            const site = document.getElementById('site').value;
+            const num = document.getElementById('num').value;
+            const timeRange = document.getElementById('time-range').value;
+            
+            // Build keywords part
+            let keywordsQuery = '';
+            const keywordContainers = document.querySelectorAll('.keyword-container');
+            
+            keywordContainers.forEach((container, index) => {
+                const keyword = container.querySelector('.keyword-input').value.trim();
+                const operator = container.querySelector('.operator-select').value;
+                
+                if (keyword) {
+                    if (index > 0) {
+                        keywordsQuery += ` ${operator} `;
+                    }
+                    keywordsQuery += `"${keyword}"`;
+                }
+            });
+            
+            // Build the full query
+            let query = `https://www.google.co.in/search?q=site:${site}+${encodeURIComponent(keywordsQuery)}`;
+            
+            // Add parameters
+            query += `&num=${num}`;
+            
+            if (timeRange) {
+                query += `&tbs=${timeRange}`;
+            }
+            
+            document.getElementById('result').textContent = query;
+            return query;
+        }
+        
+        function openQuery() {
+            const query = generateQuery();
+            window.open(query, '_blank');
+        }
+        
+        // Add initial keyword fields
+        addKeyword();
+        addKeyword();
+    </script>
+</body>
+</html>

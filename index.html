@@ -9,6 +9,9 @@
     <meta name="author" content="Job Search Query Builder">
     <meta name="robots" content="index, follow">
     <link rel="canonical" href="https://buzz39.github.io/job-search-tool/">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
 
     <!-- Open Graph / Social sharing -->
     <meta property="og:type" content="website">
@@ -55,7 +58,7 @@
             --shadow-sm: 0 1px 3px rgba(0,0,0,.08);
             --shadow-md: 0 4px 16px rgba(0,0,0,.10);
             --shadow-lg: 0 8px 32px rgba(0,0,0,.12);
-            --font: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            --font: 'Inter', 'Segoe UI', system-ui, -apple-system, sans-serif;
         }
 
         html { scroll-behavior: smooth; }
@@ -112,17 +115,29 @@
 
         /* ── Hero ── */
         .hero {
-            background: linear-gradient(135deg, #1e3a8a 0%, #2563eb 60%, #0ea5e9 100%);
+            background: linear-gradient(135deg, #1e3a8a 0%, #2563eb 45%, #7c3aed 75%, #0ea5e9 100%);
+            background-size: 200% 200%;
+            animation: gradientShift 12s ease infinite;
             color: var(--white);
             text-align: center;
-            padding: 64px 24px 56px;
+            padding: 72px 24px 0;
+            position: relative;
+            overflow: hidden;
+        }
+        .hero::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(ellipse at 70% 20%, rgba(124,58,237,.25) 0%, transparent 60%),
+                        radial-gradient(ellipse at 20% 80%, rgba(14,165,233,.2) 0%, transparent 55%);
+            pointer-events: none;
         }
         .hero h1 {
-            font-size: clamp(1.8rem, 4vw, 2.8rem);
+            font-size: clamp(1.9rem, 4.5vw, 3rem);
             font-weight: 800;
-            letter-spacing: -.02em;
-            margin-bottom: 14px;
-            line-height: 1.2;
+            letter-spacing: -.03em;
+            margin-bottom: 16px;
+            line-height: 1.15;
         }
         .hero p {
             font-size: clamp(1rem, 2vw, 1.2rem);
@@ -140,10 +155,47 @@
             background: rgba(255,255,255,.18);
             border: 1px solid rgba(255,255,255,.3);
             border-radius: 999px;
-            padding: 4px 14px;
+            padding: 5px 16px;
             font-size: .82rem;
             font-weight: 600;
-            backdrop-filter: blur(4px);
+            backdrop-filter: blur(8px);
+            letter-spacing: .01em;
+        }
+
+        /* ── Hero stats ── */
+        .hero-stats {
+            display: flex;
+            justify-content: center;
+            gap: 32px;
+            margin-top: 36px;
+            padding: 20px 24px;
+            background: rgba(255,255,255,.1);
+            backdrop-filter: blur(10px);
+            border-top: 1px solid rgba(255,255,255,.15);
+        }
+        .hero-stat strong {
+            display: block;
+            font-size: 1.6rem;
+            font-weight: 800;
+            letter-spacing: -.02em;
+        }
+        .hero-stat span {
+            font-size: .78rem;
+            opacity: .75;
+            font-weight: 500;
+            letter-spacing: .03em;
+            text-transform: uppercase;
+        }
+
+        /* ── Hero wave ── */
+        .hero-wave {
+            line-height: 0;
+            margin-top: -1px;
+        }
+        .hero-wave svg {
+            width: 100%;
+            height: 56px;
+            display: block;
         }
 
         /* ── Main layout ── */
@@ -466,7 +518,119 @@
         @media (max-width: 480px) {
             .card { padding: 20px 16px; }
             .nav-links { display: none; }
+            .hero-stats { gap: 20px; }
+            .hero-stat strong { font-size: 1.3rem; }
+            .how-steps { flex-direction: column; align-items: center; }
+            .step-arrow { transform: rotate(90deg); }
         }
+
+        /* ── Animated gradient ── */
+        @keyframes gradientShift {
+            0%   { background-position: 0% 50%; }
+            50%  { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* ── How it Works strip ── */
+        .how-it-works-strip {
+            background: var(--white);
+            border-bottom: 1px solid var(--border);
+            padding: 36px 16px 32px;
+        }
+        .how-it-works-strip h2 {
+            text-align: center;
+            font-size: 1.05rem;
+            font-weight: 700;
+            color: var(--text-muted);
+            letter-spacing: .06em;
+            text-transform: uppercase;
+            margin-bottom: 28px;
+        }
+        .how-steps {
+            max-width: 780px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+        .how-step {
+            display: flex;
+            align-items: flex-start;
+            gap: 14px;
+            max-width: 200px;
+            text-align: left;
+        }
+        .step-num {
+            flex-shrink: 0;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--primary), #7c3aed);
+            color: var(--white);
+            font-weight: 800;
+            font-size: .95rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 12px rgba(37,99,235,.35);
+        }
+        .step-content h3 {
+            font-size: .9rem;
+            font-weight: 700;
+            color: var(--text);
+            margin-bottom: 4px;
+        }
+        .step-content p {
+            font-size: .8rem;
+            color: var(--text-muted);
+            line-height: 1.5;
+        }
+        .step-arrow {
+            font-size: 1.4rem;
+            color: #d1d5db;
+            flex-shrink: 0;
+            margin-top: 6px;
+        }
+
+        /* ── Card accent border ── */
+        .card-accent {
+            border-top: 3px solid transparent;
+            border-image: linear-gradient(90deg, var(--primary), #7c3aed) 1;
+            border-image-slice: 1;
+        }
+
+        /* ── Colourful tip cards ── */
+        .tip-card { transition: transform .15s, box-shadow .15s; }
+        .tip-card:hover { transform: translateY(-3px); box-shadow: 0 6px 20px rgba(0,0,0,.1); }
+        .tip-indigo { background: #eef2ff; border-color: #c7d2fe; }
+        .tip-indigo h3 { color: #4338ca; }
+        .tip-purple { background: #faf5ff; border-color: #e9d5ff; }
+        .tip-purple h3 { color: #7c3aed; }
+        .tip-green  { background: #f0fdf4; border-color: #bbf7d0; }
+        .tip-green  h3 { color: #15803d; }
+        .tip-orange { background: #fff7ed; border-color: #fed7aa; }
+        .tip-orange h3 { color: #c2410c; }
+        .tip-teal   { background: #f0fdfa; border-color: #99f6e4; }
+        .tip-teal   h3 { color: #0f766e; }
+        .tip-pink   { background: #fdf2f8; border-color: #f5d0fe; }
+        .tip-pink   h3 { color: #a21caf; }
+
+        /* ── Gradient primary button ── */
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary) 0%, #7c3aed 100%);
+            color: var(--white);
+            box-shadow: 0 4px 14px rgba(37,99,235,.4);
+        }
+        .btn-primary:hover {
+            background: linear-gradient(135deg, var(--primary-dark) 0%, #6d28d9 100%);
+            box-shadow: 0 6px 18px rgba(37,99,235,.5);
+        }
+
+        /* ── Card hover ── */
+        .card { transition: box-shadow .2s; }
+        .card:hover { box-shadow: var(--shadow-lg); }
     </style>
 </head>
 <body>
@@ -498,13 +662,53 @@
             <span class="badge">✓ Multiple Job Boards</span>
             <span class="badge">✓ Boolean Search</span>
         </div>
+        <div class="hero-stats">
+            <div class="hero-stat"><strong>7+</strong><span>Job Boards</span></div>
+            <div class="hero-stat"><strong>100%</strong><span>Free Forever</span></div>
+            <div class="hero-stat"><strong>0</strong><span>Sign-ups Needed</span></div>
+        </div>
+        <div class="hero-wave" aria-hidden="true">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 56" preserveAspectRatio="none">
+                <path fill="#f9fafb" d="M0,28 C240,60 480,0 720,28 C960,56 1200,0 1440,28 L1440,56 L0,56 Z"/>
+            </svg>
+        </div>
     </header>
+
+    <!-- How it Works -->
+    <div class="how-it-works-strip">
+        <h2>How It Works</h2>
+        <div class="how-steps">
+            <div class="how-step">
+                <div class="step-num">1</div>
+                <div class="step-content">
+                    <h3>Pick a Job Board</h3>
+                    <p>Select from LinkedIn, Indeed, Glassdoor, and more.</p>
+                </div>
+            </div>
+            <div class="step-arrow" aria-hidden="true">→</div>
+            <div class="how-step">
+                <div class="step-num">2</div>
+                <div class="step-content">
+                    <h3>Add Keywords</h3>
+                    <p>Enter job titles, skills, or use a quick-fill preset.</p>
+                </div>
+            </div>
+            <div class="step-arrow" aria-hidden="true">→</div>
+            <div class="how-step">
+                <div class="step-num">3</div>
+                <div class="step-content">
+                    <h3>Search &amp; Discover</h3>
+                    <p>Generate your Boolean query and find fresh listings.</p>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <main>
 
         <!-- ── BUILDER CARD ── -->
         <section id="builder" aria-label="Query builder">
-            <div class="card">
+            <div class="card card-accent">
                 <p class="card-title">
                     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
                     Build Your Search Query
@@ -619,32 +823,32 @@
             <h2 class="section-title">💡 Search Tips for Better Results</h2>
             <p class="section-sub">Get the most out of every job search with these proven strategies.</p>
             <div class="tips-grid">
-                <div class="tip-card">
+                <div class="tip-card tip-indigo">
                     <div class="tip-icon">🔀</div>
                     <h3>Use OR for synonyms</h3>
                     <p>Connect similar titles with OR — e.g. "Software Engineer" OR "Developer" — to cast a wider net.</p>
                 </div>
-                <div class="tip-card">
+                <div class="tip-card tip-purple">
                     <div class="tip-icon">🎯</div>
                     <h3>Use AND to narrow down</h3>
                     <p>Combine skills with AND — e.g. "Python" AND "Machine Learning" — to find roles that need both.</p>
                 </div>
-                <div class="tip-card">
+                <div class="tip-card tip-teal">
                     <div class="tip-icon">📅</div>
                     <h3>Filter by date</h3>
                     <p>Set "Past 24 hours" or "Past week" to see the freshest listings and apply before the crowd.</p>
                 </div>
-                <div class="tip-card">
+                <div class="tip-card tip-orange">
                     <div class="tip-icon">🌍</div>
                     <h3>Try multiple job boards</h3>
                     <p>Run the same query on LinkedIn, Indeed, and Glassdoor to avoid missing hidden opportunities.</p>
                 </div>
-                <div class="tip-card">
+                <div class="tip-card tip-green">
                     <div class="tip-icon">📋</div>
                     <h3>Copy &amp; track your queries</h3>
                     <p>Save your best-performing URLs to revisit daily — great for systematic job-hunting campaigns.</p>
                 </div>
-                <div class="tip-card">
+                <div class="tip-card tip-pink">
                     <div class="tip-icon">🏷️</div>
                     <h3>Add location keywords</h3>
                     <p>Include a city or "Remote" in the Location field to get results tailored to where you want to work.</p>

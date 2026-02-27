@@ -1,55 +1,69 @@
-# LinkedIn Job Search Query Builder
+# Job Search Query Builder
 
-A simple HTML web app that helps you create customized Google search queries for finding jobs on LinkedIn.
+A free, professional-grade web app that helps job seekers build powerful Boolean search queries to surface the best job listings on **LinkedIn, Indeed, Glassdoor, Wellfound, Monster, Dice, and Remote.co** — in seconds.
 
-## 🚀 Features
-
-- **Dynamic Keyword Building**: Add multiple keywords with OR/AND operators
-- **Customizable Parameters**: 
-  - Number of search results
-  - Time range filter (past 24 hours, week, month, year)
-- **Instant Preview**: See your generated search URL
-- **One-Click Search**: Open your search directly in a new tab
-
-## 📋 How to Use
-
-1. Enter your search terms (like "AI", "Gen AI", "Generative AI")
-2. Choose whether to connect terms with OR or AND operators
-3. Set how many results to display and the time range
-4. Click "Generate Query" to see the URL or "Generate & Open" to launch the search
-
-## 🛠️ Technology
-
-This is a single HTML file application with:
-- Vanilla JavaScript for functionality
-- Inline CSS for styling
-- No external dependencies
-
-## 🔧 Installation
-
-Simply download the HTML file and open it in any modern web browser. No server or installation required!
-
-## 🌐 Live Demo
-
-Check out the live version: [LinkedIn Job Search Query Builder](https://buzz39.github.io/job-search-tool/)
-
-## 💡 Why This Tool?
-
-Finding specific job listings on LinkedIn can be challenging. This tool helps you create powerful Google search queries that can surface relevant job postings by:
-
-- Targeting specific keywords
-- Using Boolean operators (AND/OR)
-- Filtering by recency
-- Focusing only on LinkedIn job listings
-
-## 📝 License
-
-MIT License - feel free to modify and use as needed!
-
-## 👨‍💻 Contributing
-
-Contributions, issues, and feature requests are welcome! Feel free to check the [issues page](https://github.com/buzz39/job-search-tool/issues).
+🌐 **Live Demo**: [buzz39.github.io/job-search-tool](https://buzz39.github.io/job-search-tool/)
 
 ---
 
-**Note**: This tool uses Google's site search functionality to find LinkedIn job listings. It is not affiliated with LinkedIn or Google.
+## 🚀 Features
+
+- **Multiple Job Boards** – Search LinkedIn, Indeed, Glassdoor, Wellfound, Monster, Dice, and Remote.co
+- **Boolean Keyword Builder** – Combine keywords with AND / OR operators for precision targeting
+- **Quick-Fill Presets** – One-click presets for popular roles: AI/ML, Software Engineering, Product Management, Data, DevOps, Design, Cybersecurity, Marketing
+- **Location Filter** – Add a city, country, or "Remote" to narrow results geographically
+- **Date Posted Filter** – Filter by past 24 hours, week, month, or year
+- **Copy to Clipboard** – Copy the generated search URL with one click
+- **One-Click Search** – Open your query directly in Google
+- **Fully Responsive** – Works on desktop, tablet, and mobile
+- **No Sign-Up Required** – 100% free, runs entirely in your browser
+- **SEO-Optimized** – Proper meta tags, Open Graph, and structured data
+
+## 📋 How to Use
+
+1. **Choose a job board** from the dropdown (LinkedIn, Indeed, Glassdoor, etc.)
+2. **Enter keywords** — use the quick presets or type your own job titles and skills
+3. **Set your location** (optional) and preferred **date range**
+4. Click **Generate Query** to preview the search URL, or **Search Now** to open it instantly in Google
+
+## 🛠️ Technology
+
+Single-file HTML application — no build tools, no dependencies, no server required:
+
+- Vanilla JavaScript
+- Modern CSS (custom properties, grid, flexbox, animations)
+- Semantic HTML5 with ARIA accessibility attributes
+- JSON-LD structured data for SEO
+
+## 🔧 Getting Started
+
+Simply open `index.html` in any modern browser — or visit the [live site](https://buzz39.github.io/job-search-tool/).
+
+```bash
+git clone https://github.com/buzz39/job-search-tool.git
+cd job-search-tool
+open index.html   # macOS
+# or: start index.html   (Windows)
+# or: xdg-open index.html  (Linux)
+```
+
+## 💡 Why This Tool?
+
+Native job-board search engines can be limiting. By leveraging Google's site-search capabilities with Boolean operators, this tool surfaces highly relevant listings that might never appear in standard filtered searches — giving job seekers an edge.
+
+- **OR** operator: cast a wider net across synonymous titles
+- **AND** operator: require multiple skills in the same listing
+- **Date filters**: get fresh postings before the competition
+
+## 📝 License
+
+MIT License — free to use, modify, and distribute.
+
+## 👨‍💻 Contributing
+
+Contributions, issues, and feature requests are welcome!  
+Check the [issues page](https://github.com/buzz39/job-search-tool/issues) to get started.
+
+---
+
+> **Disclaimer**: This tool uses Google's site-search functionality. It is not affiliated with LinkedIn, Indeed, Glassdoor, Google, or any other job board.

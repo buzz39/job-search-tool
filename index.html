@@ -3,209 +3,845 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LinkedIn Job Search Query Builder</title>
+    <title>Job Search Query Builder – Find Jobs on LinkedIn, Indeed & More</title>
+    <meta name="description" content="Free job search query builder tool. Create powerful Boolean search queries to find jobs on LinkedIn, Indeed, Glassdoor and more. Filter by keywords, location, and date. No sign-up needed.">
+    <meta name="keywords" content="job search tool, LinkedIn job search, Boolean job search, job query builder, find jobs online, job search tips, career search">
+    <meta name="author" content="Job Search Query Builder">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://buzz39.github.io/job-search-tool/">
+
+    <!-- Open Graph / Social sharing -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://buzz39.github.io/job-search-tool/">
+    <meta property="og:title" content="Job Search Query Builder – Find Jobs on LinkedIn, Indeed & More">
+    <meta property="og:description" content="Create powerful Boolean job search queries in seconds. Search LinkedIn, Indeed, Glassdoor, and more. Free, no sign-up required.">
+    <meta property="og:image" content="https://buzz39.github.io/job-search-tool/og-image.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Job Search Query Builder">
+    <meta name="twitter:description" content="Build powerful job search queries for LinkedIn, Indeed, Glassdoor and more – free, instant, no sign-up.">
+
+    <!-- Structured data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "Job Search Query Builder",
+      "url": "https://buzz39.github.io/job-search-tool/",
+      "description": "Free tool to create powerful Boolean job search queries for LinkedIn, Indeed, Glassdoor, and more.",
+      "applicationCategory": "BusinessApplication",
+      "operatingSystem": "Any",
+      "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+    }
+    </script>
+
     <style>
+        /* ── Reset & variables ── */
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+        :root {
+            --primary: #2563eb;
+            --primary-dark: #1d4ed8;
+            --primary-light: #eff6ff;
+            --accent: #0ea5e9;
+            --success: #16a34a;
+            --danger: #dc2626;
+            --danger-hover: #b91c1c;
+            --text: #111827;
+            --text-muted: #6b7280;
+            --border: #e5e7eb;
+            --bg: #f9fafb;
+            --white: #ffffff;
+            --radius: 10px;
+            --shadow-sm: 0 1px 3px rgba(0,0,0,.08);
+            --shadow-md: 0 4px 16px rgba(0,0,0,.10);
+            --shadow-lg: 0 8px 32px rgba(0,0,0,.12);
+            --font: 'Segoe UI', system-ui, -apple-system, sans-serif;
+        }
+
+        html { scroll-behavior: smooth; }
+
         body {
-            font-family: Arial, sans-serif;
-            max-width: 800px;
+            font-family: var(--font);
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        /* ── Top nav ── */
+        nav {
+            background: var(--white);
+            border-bottom: 1px solid var(--border);
+            padding: 0 24px;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: var(--shadow-sm);
+        }
+        .nav-inner {
+            max-width: 960px;
             margin: 0 auto;
-            padding: 20px;
-            background-color: #f5f5f5;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 56px;
         }
-        h1 {
-            color: #0077b5;
+        .nav-brand {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--primary);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .nav-brand svg { flex-shrink: 0; }
+        .nav-links {
+            display: flex;
+            gap: 24px;
+            list-style: none;
+        }
+        .nav-links a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: .9rem;
+            font-weight: 500;
+            transition: color .15s;
+        }
+        .nav-links a:hover { color: var(--primary); }
+
+        /* ── Hero ── */
+        .hero {
+            background: linear-gradient(135deg, #1e3a8a 0%, #2563eb 60%, #0ea5e9 100%);
+            color: var(--white);
             text-align: center;
+            padding: 64px 24px 56px;
         }
-        .container {
-            background-color: white;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        .hero h1 {
+            font-size: clamp(1.8rem, 4vw, 2.8rem);
+            font-weight: 800;
+            letter-spacing: -.02em;
+            margin-bottom: 14px;
+            line-height: 1.2;
         }
-        .form-group {
-            margin-bottom: 15px;
+        .hero p {
+            font-size: clamp(1rem, 2vw, 1.2rem);
+            opacity: .88;
+            max-width: 600px;
+            margin: 0 auto 28px;
         }
+        .hero-badges {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            justify-content: center;
+        }
+        .badge {
+            background: rgba(255,255,255,.18);
+            border: 1px solid rgba(255,255,255,.3);
+            border-radius: 999px;
+            padding: 4px 14px;
+            font-size: .82rem;
+            font-weight: 600;
+            backdrop-filter: blur(4px);
+        }
+
+        /* ── Main layout ── */
+        main {
+            max-width: 960px;
+            margin: 0 auto;
+            padding: 36px 16px 64px;
+        }
+
+        /* ── Card ── */
+        .card {
+            background: var(--white);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow-md);
+            padding: 32px;
+            margin-bottom: 24px;
+        }
+        .card-title {
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--text);
+        }
+
+        /* ── Form elements ── */
+        .form-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+        @media (max-width: 600px) { .form-grid { grid-template-columns: 1fr; } }
+
+        .form-group { margin-bottom: 20px; }
+        .form-group:last-child { margin-bottom: 0; }
+
         label {
             display: block;
-            margin-bottom: 5px;
-            font-weight: bold;
+            font-size: .875rem;
+            font-weight: 600;
+            margin-bottom: 6px;
+            color: var(--text);
         }
-        input[type="text"], select {
+        label .hint {
+            font-weight: 400;
+            color: var(--text-muted);
+            font-size: .8rem;
+        }
+
+        input[type="text"],
+        input[type="number"],
+        select {
             width: 100%;
-            padding: 8px;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-            box-sizing: border-box;
+            padding: 10px 14px;
+            border: 1.5px solid var(--border);
+            border-radius: 8px;
+            font-size: .95rem;
+            font-family: var(--font);
+            color: var(--text);
+            background: var(--white);
+            transition: border-color .15s, box-shadow .15s;
+            outline: none;
         }
-        .keyword-container {
-            border: 1px solid #ddd;
-            padding: 10px;
-            border-radius: 4px;
-            margin-bottom: 10px;
+        input[type="text"]:focus,
+        input[type="number"]:focus,
+        select:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(37,99,235,.15);
         }
+        input[readonly] {
+            background: var(--bg);
+            cursor: default;
+        }
+
+        /* ── Keyword rows ── */
+        #keywords-container { margin-bottom: 12px; }
+
         .keyword-row {
             display: flex;
-            margin-bottom: 10px;
             align-items: center;
+            gap: 10px;
+            margin-bottom: 10px;
+            animation: slideIn .18s ease;
         }
-        .keyword-input {
-            flex-grow: 1;
-            margin-right: 10px;
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateY(-6px); }
+            to   { opacity: 1; transform: translateY(0); }
         }
-        button {
-            background-color: #0077b5;
-            color: white;
-            border: none;
-            padding: 10px 15px;
-            border-radius: 4px;
+        .keyword-row .keyword-input { flex: 1; }
+        .operator-select { width: 90px; flex-shrink: 0; }
+
+        /* ── Quick presets ── */
+        .presets-label {
+            font-size: .82rem;
+            font-weight: 600;
+            color: var(--text-muted);
+            margin-bottom: 8px;
+            display: block;
+        }
+        .presets {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 16px;
+        }
+        .preset-chip {
+            background: var(--primary-light);
+            color: var(--primary);
+            border: 1px solid #bfdbfe;
+            border-radius: 999px;
+            padding: 4px 14px;
+            font-size: .82rem;
+            font-weight: 600;
             cursor: pointer;
-            font-weight: bold;
+            transition: background .15s, color .15s;
         }
-        button:hover {
-            background-color: #005582;
+        .preset-chip:hover {
+            background: var(--primary);
+            color: var(--white);
+            border-color: var(--primary);
         }
-        .remove-btn {
-            background-color: #e74c3c;
+
+        /* ── Buttons ── */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 7px;
+            padding: 11px 22px;
+            border: none;
+            border-radius: 8px;
+            font-size: .95rem;
+            font-weight: 600;
+            font-family: var(--font);
+            cursor: pointer;
+            transition: background .15s, transform .1s, box-shadow .15s;
+            text-decoration: none;
         }
-        .remove-btn:hover {
-            background-color: #c0392b;
+        .btn:active { transform: scale(.97); }
+
+        .btn-primary {
+            background: var(--primary);
+            color: var(--white);
+            box-shadow: 0 2px 8px rgba(37,99,235,.35);
         }
-        .result {
-            margin-top: 20px;
-            padding: 15px;
-            background-color: #f9f9f9;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-            word-break: break-all;
+        .btn-primary:hover { background: var(--primary-dark); }
+
+        .btn-success {
+            background: var(--success);
+            color: var(--white);
+            box-shadow: 0 2px 8px rgba(22,163,74,.3);
         }
+        .btn-success:hover { background: #15803d; }
+
+        .btn-outline {
+            background: var(--white);
+            color: var(--text-muted);
+            border: 1.5px solid var(--border);
+        }
+        .btn-outline:hover { background: var(--bg); color: var(--text); }
+
+        .btn-danger {
+            background: transparent;
+            color: var(--danger);
+            border: 1.5px solid #fecaca;
+            padding: 8px 12px;
+            font-size: .82rem;
+        }
+        .btn-danger:hover { background: #fef2f2; border-color: var(--danger); }
+
+        .btn-sm { padding: 6px 14px; font-size: .85rem; }
+
         .controls {
             display: flex;
-            justify-content: space-between;
-            margin-top: 15px;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-top: 8px;
         }
-        .operator-select {
-            width: 80px;
+
+        /* ── Result box ── */
+        .result-card {
+            background: var(--white);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow-md);
+            padding: 24px 28px;
+            margin-top: 24px;
+            display: none;
+        }
+        .result-card.visible { display: block; }
+        .result-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 14px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        .result-header h2 {
+            font-size: 1rem;
+            font-weight: 700;
+        }
+        .result-url {
+            background: var(--bg);
+            border: 1.5px solid var(--border);
+            border-radius: 8px;
+            padding: 14px 16px;
+            font-size: .85rem;
+            color: var(--primary);
+            word-break: break-all;
+            font-family: 'Courier New', monospace;
+            line-height: 1.5;
+            margin-bottom: 14px;
+        }
+        .result-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        .copy-feedback {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            color: var(--success);
+            font-size: .85rem;
+            font-weight: 600;
+            opacity: 0;
+            transition: opacity .3s;
+        }
+        .copy-feedback.show { opacity: 1; }
+
+        /* ── Toast ── */
+        .toast {
+            position: fixed;
+            bottom: 28px;
+            right: 28px;
+            background: #1f2937;
+            color: var(--white);
+            padding: 12px 20px;
+            border-radius: 8px;
+            font-size: .9rem;
+            font-weight: 500;
+            box-shadow: var(--shadow-lg);
+            transform: translateY(20px);
+            opacity: 0;
+            transition: transform .25s, opacity .25s;
+            z-index: 999;
+            pointer-events: none;
+        }
+        .toast.show { transform: translateY(0); opacity: 1; }
+
+        /* ── Tips section ── */
+        .tips-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 16px;
+        }
+        .tip-card {
+            background: var(--primary-light);
+            border: 1px solid #bfdbfe;
+            border-radius: 8px;
+            padding: 16px;
+        }
+        .tip-card .tip-icon { font-size: 1.4rem; margin-bottom: 6px; }
+        .tip-card h3 { font-size: .95rem; font-weight: 700; margin-bottom: 4px; color: var(--primary-dark); }
+        .tip-card p { font-size: .85rem; color: #374151; }
+
+        /* ── FAQ ── */
+        .faq-item {
+            border-bottom: 1px solid var(--border);
+            padding: 16px 0;
+        }
+        .faq-item:last-child { border-bottom: none; }
+        .faq-question {
+            font-weight: 700;
+            font-size: .95rem;
+            margin-bottom: 6px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .faq-answer {
+            font-size: .9rem;
+            color: var(--text-muted);
+            line-height: 1.7;
+            display: none;
+        }
+        .faq-item.open .faq-answer { display: block; }
+        .faq-toggle { transition: transform .2s; }
+        .faq-item.open .faq-toggle { transform: rotate(45deg); }
+
+        /* ── Footer ── */
+        footer {
+            background: #1f2937;
+            color: #9ca3af;
+            text-align: center;
+            padding: 28px 16px;
+            font-size: .85rem;
+        }
+        footer a { color: #60a5fa; text-decoration: none; }
+        footer a:hover { color: var(--white); }
+
+        /* ── Utility ── */
+        .section-title {
+            font-size: 1.25rem;
+            font-weight: 800;
+            color: var(--text);
+            margin-bottom: 4px;
+        }
+        .section-sub {
+            color: var(--text-muted);
+            font-size: .9rem;
+            margin-bottom: 20px;
+        }
+        .divider { border: none; border-top: 1px solid var(--border); margin: 8px 0 20px; }
+
+        @media (max-width: 480px) {
+            .card { padding: 20px 16px; }
+            .nav-links { display: none; }
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <h1>LinkedIn Job Search Query Builder</h1>
-        
-        <div class="form-group">
-            <label for="site">Site:</label>
-            <input type="text" id="site" value="linkedin.com/jobs" readonly>
+
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-inner">
+            <a class="nav-brand" href="#">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
+                </svg>
+                JobQueryBuilder
+            </a>
+            <ul class="nav-links">
+                <li><a href="#builder">Builder</a></li>
+                <li><a href="#tips">Tips</a></li>
+                <li><a href="#faq">FAQ</a></li>
+            </ul>
         </div>
-        
-        <div class="form-group">
-            <label>Keywords (with operators):</label>
-            <div id="keywords-container">
-                <div class="keyword-container">
-                    <div class="keyword-row">
-                        <input type="text" class="keyword-input" placeholder="Enter keyword (e.g., AI)">
-                        <select class="operator-select">
-                            <option value="OR">OR</option>
-                            <option value="AND">AND</option>
+    </nav>
+
+    <!-- Hero -->
+    <header class="hero">
+        <h1>Job Search Query Builder</h1>
+        <p>Build powerful Boolean search queries to surface the best jobs on LinkedIn, Indeed, Glassdoor &amp; more — in seconds.</p>
+        <div class="hero-badges">
+            <span class="badge">✓ 100% Free</span>
+            <span class="badge">✓ No Sign-up</span>
+            <span class="badge">✓ Multiple Job Boards</span>
+            <span class="badge">✓ Boolean Search</span>
+        </div>
+    </header>
+
+    <main>
+
+        <!-- ── BUILDER CARD ── -->
+        <section id="builder" aria-label="Query builder">
+            <div class="card">
+                <p class="card-title">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+                    Build Your Search Query
+                </p>
+
+                <!-- Job Board -->
+                <div class="form-group">
+                    <label for="site">Job Board <span class="hint">— the site to search</span></label>
+                    <select id="site">
+                        <option value="linkedin.com/jobs">LinkedIn Jobs</option>
+                        <option value="indeed.com">Indeed</option>
+                        <option value="glassdoor.com/job-listing">Glassdoor</option>
+                        <option value="wellfound.com/jobs">Wellfound (AngelList)</option>
+                        <option value="monster.com/jobs">Monster</option>
+                        <option value="dice.com/jobs">Dice (Tech)</option>
+                        <option value="remote.co/remote-jobs">Remote.co</option>
+                    </select>
+                </div>
+
+                <hr class="divider">
+
+                <!-- Keywords -->
+                <div class="form-group">
+                    <label>Keywords <span class="hint">— combine with AND / OR operators</span></label>
+
+                    <span class="presets-label">Quick-fill presets:</span>
+                    <div class="presets" id="presets">
+                        <button type="button" class="preset-chip" onclick="applyPreset(['AI Engineer','Machine Learning','LLM'])">AI / ML</button>
+                        <button type="button" class="preset-chip" onclick="applyPreset(['Software Engineer','Full Stack','Backend'])">Software Eng.</button>
+                        <button type="button" class="preset-chip" onclick="applyPreset(['Product Manager','Program Manager'])">Product Mgmt</button>
+                        <button type="button" class="preset-chip" onclick="applyPreset(['Data Scientist','Data Analyst','Business Intelligence'])">Data</button>
+                        <button type="button" class="preset-chip" onclick="applyPreset(['DevOps','Cloud Engineer','SRE'])">DevOps / Cloud</button>
+                        <button type="button" class="preset-chip" onclick="applyPreset(['UX Designer','UI Designer','Product Designer'])">Design</button>
+                        <button type="button" class="preset-chip" onclick="applyPreset(['Cybersecurity','Security Engineer','Penetration Tester'])">Cybersecurity</button>
+                        <button type="button" class="preset-chip" onclick="applyPreset(['Marketing Manager','Growth','SEO'])">Marketing</button>
+                    </div>
+
+                    <div id="keywords-container"></div>
+                    <button type="button" class="btn btn-outline btn-sm" onclick="addKeyword()">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+                        Add Keyword
+                    </button>
+                </div>
+
+                <hr class="divider">
+
+                <!-- Filters grid -->
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label for="location">Location <span class="hint">— optional</span></label>
+                        <input type="text" id="location" placeholder="e.g. New York, Remote, London">
+                    </div>
+                    <div class="form-group">
+                        <label for="time-range">Date posted</label>
+                        <select id="time-range">
+                            <option value="qdr:d">Past 24 hours</option>
+                            <option value="qdr:w" selected>Past week</option>
+                            <option value="qdr:m">Past month</option>
+                            <option value="qdr:y">Past year</option>
+                            <option value="">Any time</option>
                         </select>
-                        <button class="remove-btn" onclick="removeKeyword(this)">Remove</button>
+                    </div>
+                    <div class="form-group">
+                        <label for="num">Results per page</label>
+                        <select id="num">
+                            <option value="10">10</option>
+                            <option value="20" selected>20</option>
+                            <option value="30">30</option>
+                            <option value="50">50</option>
+                        </select>
                     </div>
                 </div>
+
+                <div class="controls">
+                    <button type="button" class="btn btn-primary" onclick="generateQuery()">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+                        Generate Query
+                    </button>
+                    <button type="button" class="btn btn-success" onclick="openQuery()">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                        Search Now
+                    </button>
+                    <button type="button" class="btn btn-outline btn-sm" onclick="resetForm()">Reset</button>
+                </div>
             </div>
-            <button onclick="addKeyword()">Add Keyword</button>
-        </div>
-        
-        <div class="form-group">
-            <label for="num">Number of results:</label>
-            <input type="text" id="num" value="10">
-        </div>
-        
-        <div class="form-group">
-            <label for="time-range">Time range:</label>
-            <select id="time-range">
-                <option value="qdr:d">Past 24 hours</option>
-                <option value="qdr:w">Past week</option>
-                <option value="qdr:m">Past month</option>
-                <option value="qdr:y">Past year</option>
-                <option value="">Any time</option>
-            </select>
-        </div>
-        
-        <div class="controls">
-            <button onclick="generateQuery()">Generate Query</button>
-            <button onclick="openQuery()">Generate & Open</button>
-        </div>
-        
-        <div class="result" id="result">
-            Your query will appear here...
-        </div>
-    </div>
+
+            <!-- Result -->
+            <div class="result-card" id="result-card">
+                <div class="result-header">
+                    <h2>Your Search Query</h2>
+                    <span class="copy-feedback" id="copy-feedback">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
+                        Copied!
+                    </span>
+                </div>
+                <div class="result-url" id="result-url" role="textbox" aria-label="Generated search URL" aria-readonly="true"></div>
+                <div class="result-actions">
+                    <button type="button" class="btn btn-primary btn-sm" onclick="copyQuery()">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+                        Copy URL
+                    </button>
+                    <button type="button" class="btn btn-success btn-sm" onclick="openQuery()">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                        Open in Google
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- ── TIPS SECTION ── -->
+        <section id="tips" style="margin-top: 48px;" aria-label="Search tips">
+            <h2 class="section-title">💡 Search Tips for Better Results</h2>
+            <p class="section-sub">Get the most out of every job search with these proven strategies.</p>
+            <div class="tips-grid">
+                <div class="tip-card">
+                    <div class="tip-icon">🔀</div>
+                    <h3>Use OR for synonyms</h3>
+                    <p>Connect similar titles with OR — e.g. "Software Engineer" OR "Developer" — to cast a wider net.</p>
+                </div>
+                <div class="tip-card">
+                    <div class="tip-icon">🎯</div>
+                    <h3>Use AND to narrow down</h3>
+                    <p>Combine skills with AND — e.g. "Python" AND "Machine Learning" — to find roles that need both.</p>
+                </div>
+                <div class="tip-card">
+                    <div class="tip-icon">📅</div>
+                    <h3>Filter by date</h3>
+                    <p>Set "Past 24 hours" or "Past week" to see the freshest listings and apply before the crowd.</p>
+                </div>
+                <div class="tip-card">
+                    <div class="tip-icon">🌍</div>
+                    <h3>Try multiple job boards</h3>
+                    <p>Run the same query on LinkedIn, Indeed, and Glassdoor to avoid missing hidden opportunities.</p>
+                </div>
+                <div class="tip-card">
+                    <div class="tip-icon">📋</div>
+                    <h3>Copy &amp; track your queries</h3>
+                    <p>Save your best-performing URLs to revisit daily — great for systematic job-hunting campaigns.</p>
+                </div>
+                <div class="tip-card">
+                    <div class="tip-icon">🏷️</div>
+                    <h3>Add location keywords</h3>
+                    <p>Include a city or "Remote" in the Location field to get results tailored to where you want to work.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- ── FAQ SECTION ── -->
+        <section id="faq" style="margin-top: 48px;" aria-label="Frequently asked questions">
+            <h2 class="section-title">❓ Frequently Asked Questions</h2>
+            <p class="section-sub">Answers to common questions about the Job Search Query Builder.</p>
+            <div class="card" style="padding: 8px 28px;">
+                <div class="faq-item open">
+                    <div class="faq-question" onclick="toggleFaq(this)" role="button" tabindex="0" aria-expanded="true">
+                        What is a Boolean job search?
+                        <span class="faq-toggle" aria-hidden="true">+</span>
+                    </div>
+                    <div class="faq-answer">Boolean search uses operators like AND, OR, and NOT to combine keywords and give you precise, targeted results. This tool automates Boolean query creation so you can focus on applying, not on crafting search strings.</div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFaq(this)" role="button" tabindex="0" aria-expanded="false">
+                        Which job boards are supported?
+                        <span class="faq-toggle" aria-hidden="true">+</span>
+                    </div>
+                    <div class="faq-answer">The tool supports LinkedIn, Indeed, Glassdoor, Wellfound (AngelList), Monster, Dice, and Remote.co. More boards can be suggested via the GitHub issues page.</div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFaq(this)" role="button" tabindex="0" aria-expanded="false">
+                        Is this tool free?
+                        <span class="faq-toggle" aria-hidden="true">+</span>
+                    </div>
+                    <div class="faq-answer">Yes — completely free and open source. No registration, no hidden fees, no data collection. The tool runs entirely in your browser.</div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFaq(this)" role="button" tabindex="0" aria-expanded="false">
+                        How does the search work?
+                        <span class="faq-toggle" aria-hidden="true">+</span>
+                    </div>
+                    <div class="faq-answer">The tool builds a Google site-search URL using your keywords and selected filters. When you click "Search Now", it opens Google's results filtered to just the chosen job board — no scraping, no APIs, just a smarter Google search.</div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFaq(this)" role="button" tabindex="0" aria-expanded="false">
+                        Why aren't the results from the job board's own search?
+                        <span class="faq-toggle" aria-hidden="true">+</span>
+                    </div>
+                    <div class="faq-answer">Google indexes job boards deeply and often provides more flexible filtering than native search. Using "site:" queries surfaces listings that may not appear in the job board's own keyword filters.</div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <p>
+            Built with ❤️ for job seekers &nbsp;·&nbsp;
+            <a href="https://github.com/buzz39/job-search-tool" target="_blank" rel="noopener noreferrer">View on GitHub</a>
+            &nbsp;·&nbsp; MIT License
+        </p>
+        <p style="margin-top: 8px; font-size: .78rem;">Not affiliated with LinkedIn, Indeed, Glassdoor or Google.</p>
+    </footer>
+
+    <!-- Toast -->
+    <div class="toast" id="toast" role="alert" aria-live="polite"></div>
 
     <script>
-        function addKeyword() {
-            const container = document.getElementById('keywords-container');
-            const newKeyword = document.createElement('div');
-            newKeyword.className = 'keyword-container';
-            newKeyword.innerHTML = `
-                <div class="keyword-row">
-                    <input type="text" class="keyword-input" placeholder="Enter keyword (e.g., AI)">
-                    <select class="operator-select">
-                        <option value="OR">OR</option>
-                        <option value="AND">AND</option>
-                    </select>
-                    <button class="remove-btn" onclick="removeKeyword(this)">Remove</button>
-                </div>
+        /* ── Keyword management ── */
+        function createKeywordRow(value = '', operator = 'OR', isFirst = false) {
+            const row = document.createElement('div');
+            row.className = 'keyword-row';
+            row.innerHTML = `
+                <input type="text" class="keyword-input" placeholder="e.g. Job Title or Skill" value="${escapeAttr(value)}" aria-label="Keyword">
+                ${isFirst ? '' : `<select class="operator-select" aria-label="Boolean operator">
+                    <option value="OR"${operator === 'OR' ? ' selected' : ''}>OR</option>
+                    <option value="AND"${operator === 'AND' ? ' selected' : ''}>AND</option>
+                </select>`}
+                <button type="button" class="btn btn-danger" onclick="removeKeyword(this)" aria-label="Remove keyword" ${isFirst ? 'style="visibility:hidden"' : ''}>✕</button>
             `;
-            container.appendChild(newKeyword);
+            return row;
         }
-        
-        function removeKeyword(button) {
-            const container = button.closest('.keyword-container');
-            container.remove();
+
+        function escapeAttr(str) {
+            return String(str).replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/'/g,'&#39;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
         }
-        
-        function generateQuery() {
+
+        function addKeyword(value = '', operator = 'OR') {
+            const container = document.getElementById('keywords-container');
+            const isFirst = container.children.length === 0;
+            container.appendChild(createKeywordRow(value, operator, isFirst));
+        }
+
+        function removeKeyword(btn) {
+            const row = btn.closest('.keyword-row');
+            const container = document.getElementById('keywords-container');
+            if (container.children.length > 1) {
+                row.remove();
+            } else {
+                showToast('At least one keyword row is required.');
+            }
+        }
+
+        function applyPreset(keywords) {
+            document.getElementById('keywords-container').innerHTML = '';
+            keywords.forEach(kw => addKeyword(kw, 'OR'));
+        }
+
+        /* ── Query generation ── */
+        function buildQuery() {
             const site = document.getElementById('site').value;
             const num = document.getElementById('num').value;
             const timeRange = document.getElementById('time-range').value;
-            
-            // Build keywords part
-            let keywordsQuery = '';
-            const keywordContainers = document.querySelectorAll('.keyword-container');
-            
-            keywordContainers.forEach((container, index) => {
-                const keyword = container.querySelector('.keyword-input').value.trim();
-                const operator = container.querySelector('.operator-select').value;
-                
-                if (keyword) {
-                    if (index > 0) {
-                        keywordsQuery += ` ${operator} `;
-                    }
-                    keywordsQuery += `"${keyword}"`;
-                }
+            const location = document.getElementById('location').value.trim();
+
+            const rows = document.querySelectorAll('.keyword-row');
+            const parts = [];
+            rows.forEach((row, i) => {
+                const kw = row.querySelector('.keyword-input').value.trim();
+                if (!kw) return;
+                const opEl = row.querySelector('.operator-select');
+                const op = opEl ? opEl.value : 'OR';
+                if (parts.length > 0) parts.push(op);
+                parts.push(`"${kw}"`);
             });
-            
-            // Build the full query
-            let query = `https://www.google.co.in/search?q=site:${site}+${encodeURIComponent(keywordsQuery)}`;
-            
-            // Add parameters
-            query += `&num=${num}`;
-            
-            if (timeRange) {
-                query += `&tbs=${timeRange}`;
-            }
-            
-            document.getElementById('result').textContent = query;
-            return query;
+
+            if (parts.length === 0) return null;
+
+            let q = parts.join(' ');
+            if (location) q += ` "${location}"`;
+
+            const allowedNum = ['10', '20', '30', '50'];
+            const safeNum = allowedNum.includes(num) ? num : '20';
+            let url = `https://www.google.com/search?q=site:${encodeURIComponent(site)}+${encodeURIComponent(q)}&num=${safeNum}`;
+            if (timeRange) url += `&tbs=${timeRange}`;
+            return url;
         }
-        
+
+        function generateQuery() {
+            const url = buildQuery();
+            if (!url) { showToast('Please enter at least one keyword.'); return null; }
+            const resultCard = document.getElementById('result-card');
+            document.getElementById('result-url').textContent = url;
+            resultCard.classList.add('visible');
+            resultCard.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+            return url;
+        }
+
         function openQuery() {
-            const query = generateQuery();
-            window.open(query, '_blank');
+            const url = generateQuery();
+            if (url) window.open(url, '_blank', 'noopener,noreferrer');
         }
-        
-        // Add initial keyword fields
-        addKeyword();
-        addKeyword();
+
+        function copyQuery() {
+            const url = document.getElementById('result-url').textContent;
+            if (!url) return;
+            navigator.clipboard.writeText(url).then(() => {
+                const fb = document.getElementById('copy-feedback');
+                fb.classList.add('show');
+                setTimeout(() => fb.classList.remove('show'), 2000);
+                showToast('URL copied to clipboard!');
+            }).catch(() => {
+                showToast('Copy failed – please select and copy manually.');
+            });
+        }
+
+        function resetForm() {
+            document.getElementById('keywords-container').innerHTML = '';
+            addKeyword();
+            addKeyword('', 'OR');
+            document.getElementById('location').value = '';
+            document.getElementById('time-range').value = 'qdr:w';
+            document.getElementById('num').value = '20';
+            document.getElementById('result-card').classList.remove('visible');
+        }
+
+        /* ── FAQ toggle ── */
+        function toggleFaq(questionEl) {
+            const item = questionEl.closest('.faq-item');
+            const isOpen = item.classList.toggle('open');
+            questionEl.setAttribute('aria-expanded', isOpen);
+        }
+        document.querySelectorAll('.faq-question').forEach(q => {
+            q.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggleFaq(q); } });
+        });
+
+        /* ── Toast ── */
+        let toastTimer;
+        function showToast(msg) {
+            const t = document.getElementById('toast');
+            t.textContent = msg;
+            t.classList.add('show');
+            clearTimeout(toastTimer);
+            toastTimer = setTimeout(() => t.classList.remove('show'), 3000);
+        }
+
+        /* ── Init ── */
+        addKeyword('', 'OR');
+        addKeyword('', 'OR');
     </script>
 </body>
 </html>

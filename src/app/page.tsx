@@ -102,6 +102,24 @@ export default function Home() {
         <section className="mt-12">
           <RecommendedResources />
         </section>
+
+        {/* JobReferral CTA */}
+        <section className="mt-12">
+          <a href="https://jobreferral.me" target="_blank" rel="noopener noreferrer" className="block">
+            <div className="bg-gradient-to-r from-emerald-500 to-teal-600 rounded-xl p-6 md:p-8 text-white hover:shadow-xl transition-all hover:-translate-y-0.5">
+              <div className="flex flex-col md:flex-row items-center gap-4">
+                <div className="text-4xl">🤝</div>
+                <div className="flex-1 text-center md:text-left">
+                  <h3 className="text-lg md:text-xl font-extrabold mb-1">Found the perfect job?</h3>
+                  <p className="text-sm md:text-base opacity-90">Get referred by a real employee at top tech companies. Referred candidates are <strong>4x more likely</strong> to get hired.</p>
+                </div>
+                <div className="shrink-0 bg-white text-emerald-700 font-bold px-5 py-2.5 rounded-lg text-sm hover:bg-emerald-50 transition-colors">
+                  JobReferral.me →
+                </div>
+              </div>
+            </div>
+          </a>
+        </section>
       </div>
     </>
   );

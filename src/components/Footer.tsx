@@ -17,7 +17,13 @@ export default function Footer() {
             View on GitHub
           </a>
         </p>
-        <p className="mt-2 text-xs">Not affiliated with LinkedIn, Indeed, Glassdoor or Google.</p>
+        <div className="mt-4 pt-4 border-t border-gray-700">
+          <p className="text-xs text-gray-500 uppercase tracking-wider font-semibold mb-2">Sister Projects</p>
+          <a href="https://jobreferral.me" target="_blank" rel="noopener noreferrer" className="text-blue-400 hover:text-white transition-colors text-sm">
+            JobReferral.me — Get referred by real employees at top companies
+          </a>
+        </div>
+        <p className="mt-3 text-xs">Not affiliated with LinkedIn, Indeed, Glassdoor or Google.</p>
       </div>
     </footer>
   );

@@ -1,7 +1,7 @@
 import { getAllPosts } from "@/lib/blog";
 import { MetadataRoute } from "next";
 
-const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://jobsearchquerybuilder.com";
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://booleanjobs.xyz";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const posts = getAllPosts();

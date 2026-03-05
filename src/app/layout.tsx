@@ -3,8 +3,8 @@ import "./globals.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 
-const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://jobsearchquerybuilder.com";
-const SITE_NAME = "Job Search Query Builder";
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://booleanjobs.xyz";
+const SITE_NAME = "BooleanJobs – Job Search Query Builder";
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
@@ -49,6 +49,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
+        {/* TODO: Add GA4 measurement ID here, e.g. G-XXXXXXXXXX */}
+        {/* <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX" />
+        <script dangerouslySetInnerHTML={{ __html: `window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-XXXXXXXXXX');` }} /> */}
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{

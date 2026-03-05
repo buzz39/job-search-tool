@@ -15,7 +15,7 @@ export async function generateStaticParams() {
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const post = await getPostBySlug(params.slug);
   if (!post) return {};
-  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://jobsearchquerybuilder.com";
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://booleanjobs.xyz";
   return {
     title: post.title,
     description: post.description,

@@ -1,0 +1,45 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+
+@layer base {
+  html { scroll-behavior: smooth; }
+}
+
+@keyframes gradientShift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.animate-gradient {
+  background-size: 200% 200%;
+  animation: gradientShift 12s ease infinite;
+}
+
+.prose h2 {
+  @apply text-2xl font-bold mt-8 mb-4 text-gray-900;
+}
+.prose h3 {
+  @apply text-xl font-bold mt-6 mb-3 text-gray-900;
+}
+.prose p {
+  @apply mb-4 leading-relaxed text-gray-700;
+}
+.prose ul, .prose ol {
+  @apply mb-4 pl-6;
+}
+.prose li {
+  @apply mb-2 text-gray-700;
+}
+.prose a {
+  @apply text-primary hover:underline;
+}
+.prose strong {
+  @apply font-semibold text-gray-900;
+}
+.prose blockquote {
+  @apply border-l-4 border-primary pl-4 italic text-gray-600 my-4;
+}

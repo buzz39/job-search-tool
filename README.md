@@ -1,69 +1,36 @@
-# Job Search Query Builder
+This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
-A free, professional-grade web app that helps job seekers build powerful Boolean search queries to surface the best job listings on **LinkedIn, Indeed, Glassdoor, Wellfound, Monster, Dice, and Remote.co** — in seconds.
+## Getting Started
 
-🌐 **Live Demo**: [buzz39.github.io/job-search-tool](https://buzz39.github.io/job-search-tool/)
-
----
-
-## 🚀 Features
-
-- **Multiple Job Boards** – Search LinkedIn, Indeed, Glassdoor, Wellfound, Monster, Dice, and Remote.co
-- **Boolean Keyword Builder** – Combine keywords with AND / OR operators for precision targeting
-- **Quick-Fill Presets** – One-click presets for popular roles: AI/ML, Software Engineering, Product Management, Data, DevOps, Design, Cybersecurity, Marketing
-- **Location Filter** – Add a city, country, or "Remote" to narrow results geographically
-- **Date Posted Filter** – Filter by past 24 hours, week, month, or year
-- **Copy to Clipboard** – Copy the generated search URL with one click
-- **One-Click Search** – Open your query directly in Google
-- **Fully Responsive** – Works on desktop, tablet, and mobile
-- **No Sign-Up Required** – 100% free, runs entirely in your browser
-- **SEO-Optimized** – Proper meta tags, Open Graph, and structured data
-
-## 📋 How to Use
-
-1. **Choose a job board** from the dropdown (LinkedIn, Indeed, Glassdoor, etc.)
-2. **Enter keywords** — use the quick presets or type your own job titles and skills
-3. **Set your location** (optional) and preferred **date range**
-4. Click **Generate Query** to preview the search URL, or **Search Now** to open it instantly in Google
-
-## 🛠️ Technology
-
-Single-file HTML application — no build tools, no dependencies, no server required:
-
-- Vanilla JavaScript
-- Modern CSS (custom properties, grid, flexbox, animations)
-- Semantic HTML5 with ARIA accessibility attributes
-- JSON-LD structured data for SEO
-
-## 🔧 Getting Started
-
-Simply open `index.html` in any modern browser — or visit the [live site](https://buzz39.github.io/job-search-tool/).
+First, run the development server:
 
 ```bash
-git clone https://github.com/buzz39/job-search-tool.git
-cd job-search-tool
-open index.html   # macOS
-# or: start index.html   (Windows)
-# or: xdg-open index.html  (Linux)
+npm run dev
+# or
+yarn dev
+# or
+pnpm dev
+# or
+bun dev
 ```
 
-## 💡 Why This Tool?
+Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-Native job-board search engines can be limiting. By leveraging Google's site-search capabilities with Boolean operators, this tool surfaces highly relevant listings that might never appear in standard filtered searches — giving job seekers an edge.
+You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
 
-- **OR** operator: cast a wider net across synonymous titles
-- **AND** operator: require multiple skills in the same listing
-- **Date filters**: get fresh postings before the competition
+This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
 
-## 📝 License
+## Learn More
 
-MIT License — free to use, modify, and distribute.
+To learn more about Next.js, take a look at the following resources:
 
-## 👨‍💻 Contributing
+- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
+- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
 
-Contributions, issues, and feature requests are welcome!  
-Check the [issues page](https://github.com/buzz39/job-search-tool/issues) to get started.
+You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
 
----
+## Deploy on Vercel
 
-> **Disclaimer**: This tool uses Google's site-search functionality. It is not affiliated with LinkedIn, Indeed, Glassdoor, Google, or any other job board.
+The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+
+Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.

@@ -52,7 +52,7 @@ export default function PrivacyPage() {
         <p>We may update this Privacy Policy from time to time. Changes will be posted on this page with an updated revision date.</p>
 
         <h2>Contact Us</h2>
-        <p>If you have questions about this Privacy Policy, please contact us at <a href="mailto:hello@gaganthakur.com">hello@gaganthakur.com</a>.</p>
+        <p>If you have questions about this Privacy Policy, please contact us at <a href="mailto:hello@g-compilations.com">hello@g-compilations.com</a>.</p>
       </div>
     </div>
   );

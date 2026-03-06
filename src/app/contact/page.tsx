@@ -13,7 +13,7 @@ export default function ContactPage() {
         <p>We'd love to hear from you! Whether you have feedback, suggestions, bug reports, or just want to say hello, don't hesitate to reach out.</p>
         
         <h2>Email</h2>
-        <p>📧 <a href="mailto:hello@gaganthakur.com">hello@gaganthakur.com</a></p>
+        <p>📧 <a href="mailto:hello@g-compilations.com">hello@g-compilations.com</a></p>
         
         <h2>GitHub</h2>
         <p>Found a bug or have a feature request? Open an issue on our <a href="https://github.com/buzz39/job-search-tool/issues" target="_blank" rel="noopener noreferrer">GitHub repository</a>.</p>
@@ -28,7 +28,7 @@ export default function ContactPage() {
         </ul>
         
         <h2>Business Inquiries</h2>
-        <p>For partnerships, advertising, or business inquiries, please email <a href="mailto:hello@gaganthakur.com">hello@gaganthakur.com</a>.</p>
+        <p>For partnerships, advertising, or business inquiries, please email <a href="mailto:hello@g-compilations.com">hello@g-compilations.com</a>.</p>
       </div>
     </div>
   );

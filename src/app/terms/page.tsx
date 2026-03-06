@@ -48,7 +48,7 @@ export default function TermsPage() {
         <p>We reserve the right to modify or discontinue the Service at any time without notice. We may also update these Terms from time to time. Continued use after changes constitutes acceptance of the modified Terms.</p>
 
         <h2>9. Contact</h2>
-        <p>For questions about these Terms, contact us at <a href="mailto:hello@gaganthakur.com">hello@gaganthakur.com</a>.</p>
+        <p>For questions about these Terms, contact us at <a href="mailto:hello@g-compilations.com">hello@g-compilations.com</a>.</p>
       </div>
     </div>
   );
